@@ -4,10 +4,12 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import RootContainer from './RootContainer'
 import createStore from '../Redux'
+import Amplify from "aws-amplify-react-native";
+import AwsExports from '../../aws-exports'
 
 // create our store
 const store = createStore()
-
+Amplify.configure(AwsExports);
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js
  * call this component first.

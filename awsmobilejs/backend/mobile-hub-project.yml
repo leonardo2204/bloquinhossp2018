@@ -1,0 +1,53 @@
+--- !com.amazonaws.mobilehub.v0.Project 
+apps:
+  react-native: !com.amazonaws.mobilehub.v0.AppDO {}
+features:
+  content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
+    attributes:
+      enabled: true
+      visibility: public-global
+    components:
+      release: !com.amazonaws.mobilehub.v0.Bucket {}
+  database: !com.amazonaws.mobilehub.v0.Database 
+    components:
+      database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase 
+        tables:
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              description: S
+              end_time: 'N'
+              facebook_page: S
+              latitude: 'N'
+              lineup: SS
+              longitude: 'N'
+              name: S
+              start_time: 'N'
+              userId: S
+            hashKeyName: userId
+            hashKeyType: S
+            rangeKeyName: ''
+            rangeKeyType: ''
+            tableName: ___DYNAMIC_PREFIX___-BlocosDraft
+            tablePrivacy: protected
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              description: S
+              end_time: 'N'
+              facebook_page: S
+              latitude: 'N'
+              lineup: SS
+              longitude: 'N'
+              name: S
+              userId: S
+            hashKeyName: userId
+            hashKeyType: S
+            rangeKeyName: ''
+            rangeKeyType: ''
+            tableName: ___DYNAMIC_PREFIX___-Blocos
+            tablePrivacy: protected
+  mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
+    components:
+      analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
+  sign-in: !com.amazonaws.mobilehub.v0.SignIn {}
+name: BloquinhosSp2018
+region: us-east-1

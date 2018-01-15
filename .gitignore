@@ -55,3 +55,9 @@ buck-out/
 # Misc
 #
 .env
+
+#awsmobilejs
+#~awsmobilejs
+awsmobilejs/.awsmobile/backend-build
+awsmobilejs/\#current-backend-info
+aws-exports.js
