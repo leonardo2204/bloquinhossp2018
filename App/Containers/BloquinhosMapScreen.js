@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Text } from 'react-native'
 import { connect } from 'react-redux'
 import BloquinhosMap from '../Components/BloquinhosMap'
 import { Header, Icon } from 'react-native-elements'
+import BloquinhoCarousel from '../Components/BloquinhoCarousel'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -21,8 +22,18 @@ class BloquinhosMapScreen extends Component {
             </TouchableOpacity>}
           />
         </View>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, justifyContent: 'flex-end' }}>
           <BloquinhosMap />
+          <View
+            style = {{
+              height: '20%',
+              backgroundColor: '#FF00FFAA',
+              marginBottom: 10,
+              justifyContent: 'center'
+            }}
+          >
+            <BloquinhoCarousel />
+        </View>
         </View>
       </View>
     )
