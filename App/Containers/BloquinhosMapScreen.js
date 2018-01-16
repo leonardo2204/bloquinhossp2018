@@ -27,7 +27,6 @@ class BloquinhosMapScreen extends Component {
           <View
             style = {{
               height: '20%',
-              backgroundColor: '#FF00FFAA',
               marginBottom: 10,
               justifyContent: 'center'
             }}
