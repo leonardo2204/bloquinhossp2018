@@ -22,15 +22,9 @@ class BloquinhosMapScreen extends Component {
             </TouchableOpacity>}
           />
         </View>
-        <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+        <View style={styles.blocoContainer}>
           <BloquinhosMap />
-          <View
-            style = {{
-              height: '20%',
-              marginBottom: 10,
-              justifyContent: 'center'
-            }}
-          >
+          <View style = {styles.carouselContainer}>
             <BloquinhoCarousel />
         </View>
         </View>

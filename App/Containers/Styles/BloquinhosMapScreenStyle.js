@@ -9,5 +9,14 @@ export default StyleSheet.create({
   },
   icon: {
     color: Colors.snow,
+  },
+  blocoContainer: {
+    flex: 1,
+    justifyContent: 'flex-end'  
+  },
+  carouselContainer: {
+    height: '20%',
+    marginBottom: 10,
+    justifyContent: 'center'
   }
 })
