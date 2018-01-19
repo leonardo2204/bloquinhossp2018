@@ -4,13 +4,17 @@ import { connect } from 'react-redux'
 import BloquinhosMap from '../Components/BloquinhosMap'
 import { Header, Icon } from 'react-native-elements'
 import BloquinhoCarousel from '../Components/BloquinhoCarousel'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
+import BloquinhosActions from '../Redux/BloquinhoRedux'
 
 // Styles
 import styles from './Styles/BloquinhosMapScreenStyle'
 
 class BloquinhosMapScreen extends Component {
+
+  componentDidMount(){
+    this.props.fetch()
+  }
+
   render() {
     return (
       <View style={styles.mainContainer}>
@@ -40,6 +44,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetch: () => dispatch(BloquinhosActions.bloquinhoRequest())
   }
 }
 
