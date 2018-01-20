@@ -11,13 +11,13 @@ class BloquinhoCarousel extends Component {
         return (
             <View style={styles.container}>
               <Image
-                source={{uri: 'https://instagram.fgru5-1.fna.fbcdn.net/vp/a807d5a6d52823dc0614e1cdd92d32bb/5ADF0E92/t51.2885-15/s750x750/sh0.08/e35/14488217_151215075346617_1886875705472450560_n.jpg'}}
+                source={{uri: item.picture}}
                 style={styles.image}>
               </Image>
               <View style={styles.textContainer}>
-                <Text
+                <Text numberOfLines={4}
                   style={styles.title}>
-                  {item.name}
+                  {item.bloco_name}
                 </Text>
               </View>
             </View>

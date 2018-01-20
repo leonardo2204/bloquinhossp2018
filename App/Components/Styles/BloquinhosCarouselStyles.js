@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: itemWidth,
-    backgroundColor: 'red',
+    backgroundColor: 'white',
     height: 99,
     borderRadius: 6,
     shadowColor: "rgba(0, 0, 0, 0.13)",
@@ -35,7 +35,8 @@ export const styles = StyleSheet.create({
   },
   textContainer: {
     flexGrow: 1,
-    width: 0
+    width: 0,
+    alignSelf: 'center'
   },
   title: {
     marginTop: 10,
