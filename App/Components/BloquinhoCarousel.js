@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Dimensions, View, Text, Image } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
+import { connect } from 'react-redux'
 
 import { styles, sliderWidth, itemWidth } from './Styles/BloquinhosCarouselStyles'
 
-export default class BloquinhoCarousel extends Component {
+class BloquinhoCarousel extends Component {
 
     _renderItem ({item, index}) {
         return (
@@ -16,12 +17,8 @@ export default class BloquinhoCarousel extends Component {
               <View style={styles.textContainer}>
                 <Text
                   style={styles.title}>
-                  {item.title}
+                  {item.name}
                 </Text>
-                <Text
-                  style={styles.subtitle}>
-                  Sei que lá sei que lá sei que lá sei que lá sei que lá sei que lá sei que lá 
-                  </Text>
               </View>
             </View>
         );
@@ -29,9 +26,9 @@ export default class BloquinhoCarousel extends Component {
 
     render () {
         return (
-            <Carousel
+           this.props.bloquinhos && <Carousel
               ref={(c) => { this._carousel = c; }}
-              data={[{title: 'serete', backgroundColor: 'red'}, {title: 'sei que la', backgroundColor: 'green'}, {title: 'é sim, num é não', backgroundColor: 'yellow'}]}
+              data={this.props.bloquinhos}
               renderItem={this._renderItem}
               sliderWidth={sliderWidth}
               itemWidth={itemWidth}
@@ -39,3 +36,16 @@ export default class BloquinhoCarousel extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+      bloquinhos: state.bloquinhos.bloquinhos,
+    }
+  }
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(BloquinhoCarousel)
