@@ -6,7 +6,7 @@ import Immutable from 'seamless-immutable'
 //'description, end_time, facebook_page, latitude, lineup, longitude, name'
 const { Types, Creators } = createActions({
   bloquinhoRequest: ['latitude, longitude'],
-  bloquinhoSuccess: [[]],
+  bloquinhoSuccess: ['bloquinhos'],
   bloquinhoFailure: null
 })
 

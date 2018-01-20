@@ -1,17 +1,10 @@
 // a library to wrap and simplify api calls
-import apisauce from 'apisauce'
+import { API } from 'aws-amplify-react-native'
 
 // our "constructor"
-const create = (baseURL = 'https://ayrjnymlpd.execute-api.us-east-1.amazonaws.com/Development/') => {
-  const api = apisauce.create({
-    baseURL,
-    headers: {
-      'Cache-Control': 'no-cache'
-    },
-    timeout: 10 * 1000
-  })
+const create = () => {
 
-  const getRoot = () => api.get('')
+  const getRoot = () =>  API.get('Bloquinho', '/bloco')
 
   return {
     getRoot,

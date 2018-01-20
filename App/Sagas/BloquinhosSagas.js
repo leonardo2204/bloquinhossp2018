@@ -6,10 +6,8 @@ export function * getBloquinhos (api, action) {
   const { latitude, longitude } = action
   const response = yield call(api.getRoot, latitude, longitude)
 
-  if (response.ok) {
-
-    const bloquinhos = path(['data'], response)
-    yield put(BloquinhosActions.bloquinhoSuccess(bloquinhos))
+  if (response) {
+    yield put(BloquinhosActions.bloquinhoSuccess(response))
   } else {
     yield put(BloquinhosActions.bloquinhoFailure())
   }

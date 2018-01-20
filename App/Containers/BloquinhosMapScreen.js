@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text } from 'react-native'
+import { View, TouchableOpacity, Text, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import BloquinhosMap from '../Components/BloquinhosMap'
 import { Header, Icon } from 'react-native-elements'
@@ -21,16 +21,26 @@ class BloquinhosMapScreen extends Component {
         <View>
           <Header
             centerComponent={<Text style={styles.title}>Bloquinhos SP 2018</Text>}
-            rightComponent={<TouchableOpacity onPress={this.onPress}>
-              <Icon color='#fff' name='add' />
-            </TouchableOpacity>}
+            // rightComponent={<TouchableOpacity onPress={this.onPress}>
+            //   <Icon color='#fff' name='add' />
+            // </TouchableOpacity>}
           />
         </View>
         <View style={styles.blocoContainer}>
           <BloquinhosMap />
+          {this.props.fetching &&
+          <View style={{alignItems: 'center', flexDirection: 'row', justifyContent: 'center', flex: 1}}>
+      <View style={{
+        padding: 20,
+        backgroundColor: '#535558'
+      }}> 
+      <ActivityIndicator color='white'/>
+      <Text style={{paddingTop: 20, color:'white'}}>Carregando</Text>
+      </View></View>}
+      {!this.props.fetching && this.props.bloquinhos && this.props.bloquinhos.length > 0 &&
           <View style = {styles.carouselContainer}>
-            <BloquinhoCarousel />
-        </View>
+            <BloquinhoCarousel bloquinhos={this.props.bloquinhos} />
+        </View>}
         </View>
       </View>
     )
@@ -39,6 +49,9 @@ class BloquinhosMapScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    bloquinhos: state.bloquinhos.bloquinhos,
+    fetching: state.bloquinhos.fetching,
+    error: state.bloquinhos.error,
   }
 }
 
