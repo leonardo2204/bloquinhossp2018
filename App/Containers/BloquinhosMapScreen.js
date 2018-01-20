@@ -11,7 +11,7 @@ import styles from './Styles/BloquinhosMapScreenStyle'
 
 class BloquinhosMapScreen extends Component {
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetch()
   }
 
@@ -21,26 +21,24 @@ class BloquinhosMapScreen extends Component {
         <View>
           <Header
             centerComponent={<Text style={styles.title}>Bloquinhos SP 2018</Text>}
-            // rightComponent={<TouchableOpacity onPress={this.onPress}>
-            //   <Icon color='#fff' name='add' />
-            // </TouchableOpacity>}
+          // rightComponent={<TouchableOpacity onPress={this.onPress}>
+          //   <Icon color='#fff' name='add' />
+          // </TouchableOpacity>}
           />
         </View>
         <View style={styles.blocoContainer}>
           <BloquinhosMap />
           {this.props.fetching &&
-          <View style={{alignItems: 'center', flexDirection: 'row', justifyContent: 'center', flex: 1}}>
-      <View style={{
-        padding: 20,
-        backgroundColor: '#535558'
-      }}> 
-      <ActivityIndicator color='white'/>
-      <Text style={{paddingTop: 20, color:'white'}}>Carregando</Text>
-      </View></View>}
-      {!this.props.fetching && this.props.bloquinhos && this.props.bloquinhos.length > 0 &&
-          <View style = {styles.carouselContainer}>
-            <BloquinhoCarousel bloquinhos={this.props.bloquinhos} />
-        </View>}
+            <View style={styles.loadingContainer}>
+              <View style={styles.loadingIntrisics}>
+                <ActivityIndicator color='white' />
+                <Text style={styles.loadingText}>Carregando</Text>
+              </View>
+            </View>}
+          {!this.props.fetching && this.props.bloquinhos && this.props.bloquinhos.length > 0 &&
+            <View style={styles.carouselContainer}>
+              <BloquinhoCarousel bloquinhos={this.props.bloquinhos} />
+            </View>}
         </View>
       </View>
     )
