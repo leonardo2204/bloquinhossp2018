@@ -32,6 +32,7 @@ class BloquinhoCarousel extends Component {
               renderItem={this._renderItem}
               sliderWidth={sliderWidth}
               itemWidth={itemWidth}
+              onSnapToItem={idx => this.props.changed(this.props.bloquinhos[idx])}
             />
         );
     }
@@ -42,10 +43,5 @@ const mapStateToProps = (state) => {
       bloquinhos: state.bloquinhos.bloquinhos,
     }
   }
-  
-  const mapDispatchToProps = (dispatch) => {
-    return {
-    }
-  }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BloquinhoCarousel)
+export default connect(mapStateToProps, null)(BloquinhoCarousel)

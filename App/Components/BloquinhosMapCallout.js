@@ -18,7 +18,7 @@ export default class BloquinhosMapCallout extends React.Component {
     return (
       <Callout style={Styles.callout}>
         <TouchableOpacity onPress={this.onPress}>
-          <Text>{location.title}</Text>
+          <Text>{location.bloco_name}</Text>
         </TouchableOpacity>
       </Callout>
     )

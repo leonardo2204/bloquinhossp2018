@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, ActivityIndicator } from 'react-native'
+import { View, TouchableOpacity, Text } from 'react-native'
 import { connect } from 'react-redux'
 import BloquinhosMap from '../Components/BloquinhosMap'
 import { Header, Icon } from 'react-native-elements'
 import BloquinhoCarousel from '../Components/BloquinhoCarousel'
 import BloquinhosActions from '../Redux/BloquinhoRedux'
+
+import LoadingIndicator from '../Components/LoadingIndicator'
 
 // Styles
 import styles from './Styles/BloquinhosMapScreenStyle'
@@ -27,17 +29,13 @@ class BloquinhosMapScreen extends Component {
           />
         </View>
         <View style={styles.blocoContainer}>
-          <BloquinhosMap />
+          <BloquinhosMap bloquinhos={this.props.bloquinhos} bloquinhoSelected={this.props.bloquinhoSelected}/>
           {this.props.fetching &&
-            <View style={styles.loadingContainer}>
-              <View style={styles.loadingIntrisics}>
-                <ActivityIndicator color='white' />
-                <Text style={styles.loadingText}>Carregando</Text>
-              </View>
-            </View>}
+            <LoadingIndicator />
+          }
           {!this.props.fetching && this.props.bloquinhos && this.props.bloquinhos.length > 0 &&
             <View style={styles.carouselContainer}>
-              <BloquinhoCarousel bloquinhos={this.props.bloquinhos} />
+              <BloquinhoCarousel bloquinhos={this.props.bloquinhos} changed={this.props.bloquinhoSelected}/>
             </View>}
         </View>
       </View>
@@ -50,12 +48,14 @@ const mapStateToProps = (state) => {
     bloquinhos: state.bloquinhos.bloquinhos,
     fetching: state.bloquinhos.fetching,
     error: state.bloquinhos.error,
+    selectedBloquinho: state.selectedBloquinho
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetch: () => dispatch(BloquinhosActions.bloquinhoRequest())
+    fetch: () => dispatch(BloquinhosActions.bloquinhoRequest()),
+    bloquinhoSelected: (bloquinho) => dispatch(BloquinhosActions.bloquinhoSelected(bloquinho))
   }
 }
 
