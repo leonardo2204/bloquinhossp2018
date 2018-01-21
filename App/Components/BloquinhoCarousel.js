@@ -7,6 +7,17 @@ import { styles, sliderWidth, itemWidth } from './Styles/BloquinhosCarouselStyle
 
 class BloquinhoCarousel extends Component {
 
+  constructor(props){
+    super(props)
+
+    this._carousel = null;
+  }
+
+  componentDidUpdate(){
+    if(this.props.selectedBloquinho)
+    this._carousel.snapToItem(this.props.bloquinhos.indexOf(this.props.selectedBloquinho), true)
+  }
+
     _renderItem ({item, index}) {
         return (
             <View style={styles.container}>
@@ -41,6 +52,7 @@ class BloquinhoCarousel extends Component {
 const mapStateToProps = (state) => {
     return {
       bloquinhos: state.bloquinhos.bloquinhos,
+      selectedBloquinho: state.bloquinhos.bloquinhoSelected
     }
   }
 

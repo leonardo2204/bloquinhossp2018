@@ -22,7 +22,7 @@ class BloquinhosMap extends React.Component {
     const region = { latitude: -23.5619262, longitude: -46.6412144, latitudeDelta: 0.1, longitudeDelta: 0.1}
     this.state = {
       region,
-      showUserLocation: false
+      //showUserLocation: false
     }
     
     this.renderMapMarkers = this.renderMapMarkers.bind(this)
@@ -31,8 +31,8 @@ class BloquinhosMap extends React.Component {
   }
 
   componentDidUpdate(){
-    if(this.props.bloquinhoSelected)
-      this.mapRef.animateToCoordinate({latitude : this.props.bloquinhoSelected.latitude, longitude : this.props.bloquinhoSelected.longitude})
+    if(this.props.selectedBloquinho)
+      this.mapRef.animateToCoordinate({latitude : this.props.selectedBloquinho.latitude, longitude : this.props.selectedBloquinho.longitude})
   }
 
   onRegionChange (newRegion) {
@@ -50,19 +50,13 @@ class BloquinhosMap extends React.Component {
     // Fetch new data...
   }
 
-  calloutPress (location) {
-    /* ***********************************************************
-    * STEP 5
-    * Configure what will happen (if anything) when the user
-    * presses your callout.
-    *************************************************************/
+  calloutPress (bloquinhoSelected) {
+    this.props.calloutPress(this.props.bloquinhos.find(bloquinho => bloquinho.blocoId === bloquinhoSelected.id))
   }
 
   renderMapMarkers (bloquinho) {
     return (
-      <MapView.Marker key={bloquinho.blocoId} coordinate={{latitude: bloquinho.latitude, longitude: bloquinho.longitude}}>
-        <BloquinhosMapCallout location={bloquinho} onPress={this.calloutPress} />
-      </MapView.Marker>
+      <MapView.Marker key={bloquinho.blocoId} identifier={bloquinho.blocoId} coordinate={{latitude: bloquinho.latitude, longitude: bloquinho.longitude}} onPress={(e) => this.calloutPress(e.nativeEvent)}/>
     )
   }
 
@@ -84,7 +78,7 @@ class BloquinhosMap extends React.Component {
 const mapStateToProps = (state) => {
   return {
     bloquinhos: state.bloquinhos.bloquinhos,
-    bloquinhoSelected: state.bloquinhos.bloquinhoSelected
+    selectedBloquinho: state.bloquinhos.bloquinhoSelected
   }
 }
 

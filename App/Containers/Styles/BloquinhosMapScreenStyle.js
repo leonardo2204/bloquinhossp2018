@@ -22,7 +22,7 @@ export default StyleSheet.create({
   },
   carouselContainer: {
     height: '20%',
-    marginBottom: 10,
+    marginBottom: 28,
     justifyContent: 'center'
   },
 })

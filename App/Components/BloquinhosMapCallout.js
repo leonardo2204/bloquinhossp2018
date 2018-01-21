@@ -6,7 +6,7 @@ import Styles from './Styles/BloquinhosMapCalloutStyles'
 export default class BloquinhosMapCallout extends React.Component {
   constructor (props) {
     super(props)
-    this.onPress = this.props.onPress.bind(this, this.props.location)
+    //this.onPress = this.props.onPress.bind(this, this.props.location)
   }
 
   render () {
@@ -17,7 +17,7 @@ export default class BloquinhosMapCallout extends React.Component {
     const { location } = this.props
     return (
       <Callout style={Styles.callout}>
-        <TouchableOpacity onPress={this.onPress}>
+        <TouchableOpacity>
           <Text>{location.bloco_name}</Text>
         </TouchableOpacity>
       </Callout>
