@@ -50,13 +50,14 @@ class BloquinhosMap extends React.Component {
     // Fetch new data...
   }
 
-  calloutPress (bloquinhoSelected) {
-    this.props.calloutPress(this.props.bloquinhos.find(bloquinho => bloquinho.blocoId === bloquinhoSelected.id))
+  markerPress (bloquinhoSelected) {
+    this.props.markerPress(this.props.bloquinhos.find(bloquinho => bloquinho.blocoId === bloquinhoSelected.id))
   }
 
   renderMapMarkers (bloquinho) {
     return (
-      <MapView.Marker key={bloquinho.blocoId} identifier={bloquinho.blocoId} coordinate={{latitude: bloquinho.latitude, longitude: bloquinho.longitude}} onPress={(e) => this.calloutPress(e.nativeEvent)}/>
+      <MapView.Marker key={bloquinho.blocoId} identifier={bloquinho.blocoId} coordinate={{latitude: bloquinho.latitude, longitude: bloquinho.longitude}} 
+      onPress={(e) => this.markerPress(e.nativeEvent)}/>
     )
   }
 

@@ -29,7 +29,7 @@ class BloquinhosMapScreen extends Component {
           />
         </View>
         <View style={styles.blocoContainer}>
-          <BloquinhosMap bloquinhos={this.props.bloquinhos} calloutPress={this.props.bloquinhoSelected}/>
+          <BloquinhosMap bloquinhos={this.props.bloquinhos} markerPress={this.props.bloquinhoSelected}/>
           {this.props.fetching &&
             <LoadingIndicator />
           }
