@@ -19,8 +19,7 @@ class BloquinhoCarousel extends Component {
   }
 
   cardClicked(item){
-    console.tron.log(item)
-    //this.props.bloquinhoCardClicked(bloquinho)
+    this.props.bloquinhoCardClicked(bloquinho)
   }
 
   _renderItem({ item, index }) {

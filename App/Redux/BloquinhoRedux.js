@@ -9,7 +9,7 @@ const { Types, Creators } = createActions({
   bloquinhoSuccess: ['bloquinhos'],
   bloquinhoFailure: null,
   bloquinhoSelected: ['bloquinho'],
-  bloquinhoCardClicked: ['blocoId, picture, bloco_name'],
+  bloquinhoCardClicked: ['bloco'],
 })
 
 export const BloquinhoTypes = Types
@@ -50,7 +50,7 @@ export const bloquinhoSelected = (state, action) => {
 }
 
 export const bloquinhoCardClicked = (state, action) => {
-  const { blocoId, picture, bloco_name } = action
+  const { blocoId, picture, bloco_name } = action.bloco
   return state.merge({ bloquinhoCardSelected: {blocoId, picture, bloco_name} })
 }
 

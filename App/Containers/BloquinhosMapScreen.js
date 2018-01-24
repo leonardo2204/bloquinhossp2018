@@ -17,6 +17,12 @@ class BloquinhosMapScreen extends Component {
     this.props.fetch()
   }
 
+  componentDidUpdate(){
+    if(this.props.bloquinhoCardSelected){
+      this.props.navigation.navigate('BloquinhoDetail', {bloquinho: this.props.bloquinhoCardSelected})
+    }
+  }
+
   render() {
     return (
       <View style={styles.mainContainer}>
@@ -48,6 +54,7 @@ const mapStateToProps = (state) => {
     bloquinhos: state.bloquinhos.bloquinhos,
     fetching: state.bloquinhos.fetching,
     error: state.bloquinhos.error,
+    bloquinhoCardSelected: state.bloquinhos.bloquinhoCardSelected
   }
 }
 

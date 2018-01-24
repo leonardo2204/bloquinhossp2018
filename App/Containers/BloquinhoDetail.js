@@ -8,10 +8,10 @@ import { connect } from 'react-redux'
 import styles from './Styles/BloquinhoDetailStyle'
 
 class BloquinhoDetail extends Component {
-  // constructor (props) {
-  //   super(props)
-  //   this.state = {}
-  // }
+  constructor (props) {
+    super(props)
+    console.tron.log(this.props.navigation.state.params)
+  }
 
   render () {
     return (
