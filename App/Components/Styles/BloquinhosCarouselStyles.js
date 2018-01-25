@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 10,
     fontFamily: "Avenir",
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "500",
   },
   subtitle: {

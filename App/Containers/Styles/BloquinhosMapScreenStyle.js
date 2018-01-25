@@ -22,21 +22,7 @@ export default StyleSheet.create({
   },
   carouselContainer: {
     height: '20%',
-    marginBottom: 10,
+    marginBottom: 28,
     justifyContent: 'center'
   },
-  loadingContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    flex: 1
-  },
-  loadingIntrisics: {
-    padding: 20,
-    backgroundColor: '#535558'
-  },
-  loadingText: {
-    paddingTop: 20,
-    color: 'white'
-  }
 })

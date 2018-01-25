@@ -3,10 +3,7 @@ import { View } from 'react-native'
 import MapView from 'react-native-maps'
 import BloquinhosMapCallout from './BloquinhosMapCallout'
 import Styles from './Styles/BloquinhosMapStyles'
-
-// Generate this MapHelpers file with `ignite generate map-utilities`
-// You must have Ramda as a dev dependency to use this.
-// import { calculateRegion } from '../Lib/MapHelpers'
+import { connect } from 'react-redux'
 
 /* ***********************************************************
 * IMPORTANT!!! Before you get started, if you are going to support Android,
@@ -17,50 +14,25 @@ import Styles from './Styles/BloquinhosMapStyles'
 *************************************************************/
 
 class BloquinhosMap extends React.Component {
-  /* ***********************************************************
-  * This generated code is only intended to get you started with the basics.
-  * There are TONS of options available from traffic to buildings to indoors to compass and more!
-  * For full documentation, see https://github.com/lelandrichardson/react-native-maps
-  *************************************************************/
-
+  
   constructor (props) {
     super(props)
-    /* ***********************************************************
-    * STEP 1
-    * Set the array of locations to be displayed on your map. You'll need to define at least
-    * a latitude and longitude as well as any additional information you wish to display.
-    *************************************************************/
-    const locations = [
-      { title: 'Location A', latitude: -23.5619262, longitude: -46.6412144 },
-      { title: 'Location B', latitude: 37.75825, longitude: -122.4624 }
-    ]
-    /* ***********************************************************
-    * STEP 2
-    * Set your initial region either by dynamically calculating from a list of locations (as below)
-    * or as a fixed point, eg: { latitude: 123, longitude: 123, latitudeDelta: 0.1, longitudeDelta: 0.1}
-    * You can generate a handy `calculateRegion` function with
-    * `ignite generate map-utilities`
-    *************************************************************/
-    // const region = calculateRegion(locations, { latPadding: 0.05, longPadding: 0.05 })
+    
+    //starts at Sao Paulo center region
     const region = { latitude: -23.5619262, longitude: -46.6412144, latitudeDelta: 0.1, longitudeDelta: 0.1}
     this.state = {
       region,
-      locations,
-      showUserLocation: true
+      //showUserLocation: false
     }
+    
     this.renderMapMarkers = this.renderMapMarkers.bind(this)
-    this.onRegionChange = this.onRegionChange.bind(this)
+    this.mapRef = null;
+    //this.onRegionChange = this.onRegionChange.bind(this)
   }
 
-  componentWillReceiveProps (newProps) {
-    /* ***********************************************************
-    * STEP 3
-    * If you wish to recenter the map on new locations any time the
-    * props change, do something like this:
-    *************************************************************/
-    // this.setState({
-    //   region: calculateRegion(newProps.locations, { latPadding: 0.1, longPadding: 0.1 })
-    // })
+  componentDidUpdate(){
+    if(this.props.selectedBloquinho)
+      this.mapRef.animateToCoordinate({latitude : this.props.selectedBloquinho.latitude, longitude : this.props.selectedBloquinho.longitude})
   }
 
   onRegionChange (newRegion) {
@@ -78,27 +50,14 @@ class BloquinhosMap extends React.Component {
     // Fetch new data...
   }
 
-  calloutPress (location) {
-    /* ***********************************************************
-    * STEP 5
-    * Configure what will happen (if anything) when the user
-    * presses your callout.
-    *************************************************************/
-    
-    // console.tron.log(location) // Reactotron
+  markerPress (bloquinhoSelected) {
+    this.props.markerPress(this.props.bloquinhos.find(bloquinho => bloquinho.blocoId === bloquinhoSelected.id))
   }
 
-  renderMapMarkers (location) {
-    /* ***********************************************************
-    * STEP 6
-    * Customize the appearance and location of the map marker.
-    * Customize the callout in ./BloquinhosMapCallout.js
-    *************************************************************/
-
+  renderMapMarkers (bloquinho) {
     return (
-      <MapView.Marker key={location.title} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
-        <BloquinhosMapCallout location={location} onPress={this.calloutPress} />
-      </MapView.Marker>
+      <MapView.Marker key={bloquinho.blocoId} identifier={bloquinho.blocoId} coordinate={{latitude: bloquinho.latitude, longitude: bloquinho.longitude}} 
+      onPress={(e) => this.markerPress(e.nativeEvent)}/>
     )
   }
 
@@ -107,14 +66,22 @@ class BloquinhosMap extends React.Component {
       <MapView
         style={Styles.map}
         initialRegion={this.state.region}
-        onRegionChangeComplete={this.onRegionChange}
-        showsUserLocation={this.state.showUserLocation}
+        ref={(ref) => { this.mapRef = ref }}
+        //onRegionChangeComplete={this.onRegionChange}
+        //showsUserLocation={this.state.showUserLocation}
       >
-        {this.state.locations.map((location) => this.renderMapMarkers(location))}
+        {this.props.bloquinhos && this.props.bloquinhos.map((bloquinho) => this.renderMapMarkers(bloquinho))}
       </MapView>
     )
   }
 }
 
-export default BloquinhosMap
+const mapStateToProps = (state) => {
+  return {
+    bloquinhos: state.bloquinhos.bloquinhos,
+    selectedBloquinho: state.bloquinhos.bloquinhoSelected
+  }
+}
+
+export default connect(mapStateToProps, null)(BloquinhosMap)
 

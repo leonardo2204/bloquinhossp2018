@@ -7,7 +7,8 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   bloquinhoRequest: ['latitude, longitude'],
   bloquinhoSuccess: ['bloquinhos'],
-  bloquinhoFailure: null
+  bloquinhoFailure: null,
+  bloquinhoSelected: ['bloquinho']
 })
 
 export const BloquinhoTypes = Types
@@ -19,6 +20,7 @@ export const INITIAL_STATE = Immutable({
   bloquinhos: null,
   fetching: null,
   error: null,
+  bloquinhoSelected: null,
 })
 
 /* ------------- Selectors ------------- */
@@ -40,10 +42,16 @@ export const success = (state, action) => {
 export const failure = (state) =>
   state.merge({ fetching: false, error: true, bloquinhos: null })
 
+export const bloquinhoSelected = (state, action) => {
+  const { bloquinho } = action
+  return state.merge({ bloquinhoSelected: bloquinho })
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.BLOQUINHO_REQUEST]: request,
   [Types.BLOQUINHO_SUCCESS]: success,
-  [Types.BLOQUINHO_FAILURE]: failure
+  [Types.BLOQUINHO_FAILURE]: failure,
+  [Types.BLOQUINHO_SELECTED]: bloquinhoSelected,
 })
