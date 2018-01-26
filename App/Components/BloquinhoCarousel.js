@@ -61,4 +61,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(BloquinhoCarousel)
+export default connect(mapStateToProps)(BloquinhoCarousel)

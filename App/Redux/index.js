@@ -6,6 +6,7 @@ import rootSaga from '../Sagas/'
 export const reducers = combineReducers({
   nav: require('./NavigationRedux').reducer,
   bloquinhos: require('./BloquinhoRedux').reducer,
+  bloquinhoDetail: require('./BloquinhoDetailRedux').reducer,
 })
 
 export default () => {

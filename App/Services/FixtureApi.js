@@ -3,4 +3,7 @@ export default {
   getRoot: () => {
     return require('../Fixtures/bloquinhos.json')
   },
+  getBloquinho: () => {
+    return require('../Fixtures/bloquinhoDetail.json')
+  }
 }

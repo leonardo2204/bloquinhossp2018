@@ -5,9 +5,11 @@ import { API } from 'aws-amplify-react-native'
 const create = () => {
 
   const getRoot = () =>  API.get('Bloquinho', '/bloco')
+  const getBloquinho = (id) => API.get('Bloquinho', `/bloco/${id}`)
 
   return {
     getRoot,
+    getBloquinho
   }
 }
 
