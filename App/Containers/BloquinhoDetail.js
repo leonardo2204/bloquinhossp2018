@@ -1,15 +1,21 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, ActivityIndicator } from 'react-native'
+import { ScrollView, Text, Image, View, ActivityIndicator, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
-import moment from 'moment'
+import Moment from 'moment/min/moment-with-locales'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 import BloquinhoDetailsAction from '../Redux/BloquinhoDetailRedux'
 
 // Styles
 import styles from './Styles/BloquinhoDetailStyle'
-import { Divider, Icon } from 'react-native-elements';
+import { Divider, Icon, Header, Card } from 'react-native-elements';
 
 class BloquinhoDetail extends Component {
+
+  constructor(props) {
+    super(props)
+
+    Moment.locale('pt-br')
+  }
 
   componentDidMount() {
     this.props.preset(this.props.navigation.state.params.bloquinho)
@@ -17,20 +23,39 @@ class BloquinhoDetail extends Component {
   }
 
   render() {
+    if (!this.props.bloquinho)
+      return null;
+
+    const startTime = Moment(this.props.bloquinho.start_time).format('lll')
+    const outTime = this.props.bloquinho.end_time ? startTime + ' - ' + Moment(this.props.bloquinho.end_time).format('kk:mm') : startTime
     return (
-      <ScrollView style={styles.container}>
-        <Image source={{ uri: this.props.bloquinho ? this.props.bloquinho.picture: '' }} style={{ height: 220 }} resizeMode='stretch' />
-        <Text style={{ fontSize: 20, padding: 20, textAlign: 'center' }}>{this.props.bloquinho ? this.props.bloquinho.bloco_name: ''}</Text>
-        <Divider style={{ height: 2, backgroundColor: 'black' }} />
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <Icon iconStyle={{ padding: 10 }} name='schedule' />
-          {this.props.fetching ? <ActivityIndicator /> : <Text>{ this.props.bloquinho ? this.props.bloquinho.start_time : '' }</Text>}
-        </View>
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <Icon iconStyle={{ padding: 10 }} name='location-on' />
-          <Text>adlasdlasdlasldasldasl</Text>
-        </View>
-      </ScrollView>
+      <View style={styles.mainContainer}>
+        <Header leftComponent={<TouchableHighlight onPress={() => this.props.navigation.goBack()}>
+          <View>
+            <Icon name='arrow-back' iconStyle={{ color: 'white' }} />
+          </View>
+        </TouchableHighlight>}
+          centerComponent={<Text numberOfLines={1} style={{ color: 'white' }}>{this.props.bloquinho.bloco_name}</Text>} />
+        <ScrollView>
+          <Image source={{ uri: this.props.bloquinho.picture }} style={{ height: 220 }} resizeMode='stretch' />
+          <Card>
+            <Text style={{ fontSize: 20, padding: 20, textAlign: 'center' }}>{this.props.bloquinho.bloco_name}</Text>
+          </Card>
+          <Card title={'Informações'}>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+              <Icon iconStyle={{ padding: 10 }} name='schedule' />
+              {this.props.fetching ? <ActivityIndicator /> : <Text>{outTime}</Text>}
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+              <Icon iconStyle={{ padding: 10 }} name='location-on' />
+              {this.props.fetching ? <ActivityIndicator /> : <Text numberOfLines={2}> Rua das cabras</Text>}
+            </View>
+          </Card>
+          <Card title={'Detalhes'}>
+            <Text>asdhigasd gasdgasasjdgasjdg jagsdhj asdhg agdahj gashjdg asgdjhas gddasg asdgasdgashj gdahjs gasgdasgdas jasg djasgdagsdhj gashjdg as gdasgdas</Text>
+          </Card>
+        </ScrollView>
+      </View>
     )
   }
 }
