@@ -8,6 +8,7 @@ import BloquinhoDetailsAction from '../Redux/BloquinhoDetailRedux'
 // Styles
 import styles from './Styles/BloquinhoDetailStyle'
 import { Divider, Icon, Header, Card } from 'react-native-elements';
+import Hyperlink from 'react-native-hyperlink'
 
 class BloquinhoDetail extends Component {
 
@@ -42,17 +43,30 @@ class BloquinhoDetail extends Component {
             <Text style={{ fontSize: 20, padding: 20, textAlign: 'center' }}>{this.props.bloquinho.bloco_name}</Text>
           </Card>
           <Card title={'Informações'}>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-              <Icon iconStyle={{ padding: 10 }} name='schedule' />
-              {this.props.fetching ? <ActivityIndicator /> : <Text>{outTime}</Text>}
-            </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-              <Icon iconStyle={{ padding: 10 }} name='location-on' />
-              {this.props.fetching ? <ActivityIndicator /> : <Text numberOfLines={2}> Rua das cabras</Text>}
-            </View>
+            {this.props.fetching ? <ActivityIndicator /> :
+              <View>
+                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                  <Icon iconStyle={{ padding: 10 }} name='schedule' />
+                  <Text>{outTime}</Text>
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                  <Icon iconStyle={{ padding: 10 }} name='location-on' />
+                  <Text numberOfLines={2} style={{ marginRight: 30, textAlign: 'left' }}> {this.props.bloquinho.address}
+                  </Text>
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                  <Icon iconStyle={{ padding: 10 }} name='public' />
+                  <Hyperlink linkStyle={{ color: '#074e8e', textDecorationLine: 'underline' }} linkDefault={true}>
+                    <Text numberOfLines={2}> {this.props.bloquinho.page} </Text>
+                  </Hyperlink>
+                </View>
+              </View>
+            }
           </Card>
           <Card title={'Detalhes'}>
-            <Text>asdhigasd gasdgasasjdgasjdg jagsdhj asdhg agdahj gashjdg asgdjhas gddasg asdgasdgashj gdahjs gasgdasgdas jasg djasgdagsdhj gashjdg as gdasgdas</Text>
+          {this.props.fetching ? <ActivityIndicator /> :
+            <Text>{this.props.bloquinho.description}</Text>
+          }
           </Card>
         </ScrollView>
       </View>

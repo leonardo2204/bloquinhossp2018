@@ -38,6 +38,7 @@
     "react-native": "0.50.4",
     "react-native-config": "^0.10.0",
     "react-native-elements": "^0.19.0",
+    "react-native-hyperlink": "0.0.12",
     "react-native-maps": "0.16.4",
     "react-native-snap-carousel": "^3.5.0",
     "react-native-vector-icons": "^4.5.0",

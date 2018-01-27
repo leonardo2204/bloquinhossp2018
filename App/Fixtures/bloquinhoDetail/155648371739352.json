@@ -1,11 +1,14 @@
 [
-    {
-      "blocoId": "155648371739352",
-      "is_draft": 0,
-      "longitude": -46.669401475534,
-      "start_time": "2018-01-24T23:00:00-0200",
-      "picture": "https://scontent.xx.fbcdn.net/v/t1.0-9/25498441_1563972223683785_6194181245115263357_n.jpg?oh=cf3a76633cfc77e1d1c3429a4135207d&oe=5AECA161",
-      "latitude": -23.528079836998,
-      "bloco_name": "Shout Especial - Baile do Bloco da Preta #PréCarnaval"
-    }
-  ]
+  {
+    "blocoId": "155648371739352",
+    "is_draft": 0,
+    "page": "https://www.facebook.com/events/155648371739352/",
+    "longitude": -46.669401475534,
+    "start_time": "2018-01-24T23:00:00-0200",
+    "address": "Av. Francisco Matarazzo, 694, 05001-000 São Paulo",
+    "picture": "https://scontent.xx.fbcdn.net/v/t1.0-9/25498441_1563972223683785_6194181245115263357_n.jpg?oh=cf3a76633cfc77e1d1c3429a4135207d&oe=5AECA161",
+    "description": "Esse ano a folia começa mais cedo em São Paulo!\nVem aí mais uma edição do BAILE DO BLOCO DA PRETA, no Audio, em ritmo de Pré-Carnaval!!!\n\nPreta Gil promete levar ao palco toda a sua alegria e irreverência, com um repertório composto por músicas próprias e os hits mais estourados: uma verdadeira salada musical, com ritmos brasileiros, onde passa pelo funk, samba, axé, sertanejo, entre outros. \n\nTudo isso acompanhado por um line-up de DJS de primeira, que se apresentam antes e depois do show, até o sol raiar. \n\nSHOW \nPreta Gil & Bloco da Preta\n\nLINE UP (ABERTURA E PÓS-SHOW):\nZé Pedro\nRoque castro\nBoss In Drama\nLeandro Pardi\n\n\nLOCAL: Audio - Av. Francisco Matarazzo, 694\nABERTURA DA CASA: 23h\n\nInformações camarote:\nblocodapreta@bfun.com.br\n\nRealização: Liga | Audio | B.Fun\n\nAcesso a portadores de necessidades especiais.\nNão aceitamos cheques.\nÁrea para fumantes. \nPermitido apenas para maiores de 18 anos.",
+    "latitude": -23.528079836998,
+    "bloco_name": "Shout Especial - Baile do Bloco da Preta #PréCarnaval"
+  }
+]
