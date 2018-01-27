@@ -7,11 +7,12 @@ import DebugConfig from '../Config/DebugConfig'
 
 import { StartupTypes } from '../Redux/StartupRedux'
 import { BloquinhoTypes } from '../Redux/BloquinhoRedux'
+import { BloquinhoDetailTypes } from '../Redux/BloquinhoDetailRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
-import { getBloquinhos } from './BloquinhosSagas'
+import { getBloquinhos, getBloquinhoDetail } from './BloquinhosSagas'
  
 /* ------------- API ------------- */
 
@@ -25,6 +26,7 @@ export default function * root () {
   yield all([
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
-    takeLatest(BloquinhoTypes.BLOQUINHO_REQUEST, getBloquinhos, api)
+    takeLatest(BloquinhoTypes.BLOQUINHO_REQUEST, getBloquinhos, api),
+    takeLatest(BloquinhoDetailTypes.BLOQUINHO_DETAIL_REQUEST, getBloquinhoDetail, api)
   ])
 }

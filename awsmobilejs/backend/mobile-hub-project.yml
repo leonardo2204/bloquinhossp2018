@@ -2,6 +2,38 @@
 apps:
   react-native: !com.amazonaws.mobilehub.v0.AppDO {}
 features:
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
+    components:
+      Bloquinho: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          name: Bloquinho
+          requires-signin: false
+          sdk-generation-stage-name: Development
+        paths:
+          /bloco: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/blocos-20180116174516.zip
+            description: 'Handler for calls to resource path : /bloco/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: te/+9/8oEWihlbCO6sa/CS0WsY5xOt9ZbkVaEoTjtTg=
+            memorySize: '128'
+            modified: '2018-01-26T17:50:22.557+0000'
+            name: blocos
+            runtime: nodejs6.10
+            timeout: '3'
+            version: i6DSZHggFt_LEPjeA_a2buFRtm_V4myR
+          '/bloco/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/blocos-20180116174516.zip
+            description: 'Handler for calls to resource path : /bloco/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: te/+9/8oEWihlbCO6sa/CS0WsY5xOt9ZbkVaEoTjtTg=
+            memorySize: '128'
+            modified: '2018-01-26T17:50:22.557+0000'
+            name: blocos
+            runtime: nodejs6.10
+            timeout: '3'
+            version: .lLQDY57fb22q5UXrnu2iParvzfVU_ZL
   content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
     attributes:
       enabled: true
@@ -14,37 +46,29 @@ features:
         tables:
           - !com.amazonaws.mobilehub.v0.NoSQLTable 
             attributes:
+              blocoId: S
+              bloco_name: S
               description: S
-              end_time: 'N'
+              end_time: S
               facebook_page: S
+              is_draft: 'N'
               latitude: 'N'
               lineup: SS
               longitude: 'N'
-              name: S
-              start_time: 'N'
-              userId: S
-            hashKeyName: userId
+              start_time: S
+            hashKeyName: blocoId
             hashKeyType: S
-            rangeKeyName: ''
-            rangeKeyType: ''
-            tableName: ___DYNAMIC_PREFIX___-BlocosDraft
-            tablePrivacy: protected
-          - !com.amazonaws.mobilehub.v0.NoSQLTable 
-            attributes:
-              description: S
-              end_time: 'N'
-              facebook_page: S
-              latitude: 'N'
-              lineup: SS
-              longitude: 'N'
-              name: S
-              userId: S
-            hashKeyName: userId
-            hashKeyType: S
+            indexes:
+              - !com.amazonaws.mobilehub.v0.NoSQLIndex 
+                hashKeyName: is_draft
+                hashKeyType: 'N'
+                indexName: draft-index
+                rangeKeyName: ''
+                rangeKeyType: ''
             rangeKeyName: ''
             rangeKeyType: ''
             tableName: ___DYNAMIC_PREFIX___-Blocos
-            tablePrivacy: protected
+            tablePrivacy: public
   mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
     components:
       analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}

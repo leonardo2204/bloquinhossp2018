@@ -1,6 +1,6 @@
 {
 	"ProjectName": "BloquinhosSp2018",
-	"ProjectPath": "/Users/leonardo/react-native/BloquinhosSp2018",
+	"ProjectPath": "/Users/leonardo2204/react-native/bloquinhossp2018",
 	"SourceDir": "src",
 	"DistributionDir": "build",
 	"BuildCommand": "npm run-script build",
@@ -18,5 +18,5 @@
 	"BackendProjectName": "BloquinhosSp2018",
 	"BackendProjectConsoleUrl": "https://console.aws.amazon.com/mobilehub/home#/5fc8b3c8-097b-4ae0-9f5d-eb423e82160d/build",
 	"BackendProjectCreationTime": "2018-01-13T03:08:50.703Z",
-	"BackendProjectLastUpdatedTime": "2018-01-13T03:50:45.194Z"
+	"BackendProjectLastUpdatedTime": "2018-01-20T17:09:22.592Z"
 }

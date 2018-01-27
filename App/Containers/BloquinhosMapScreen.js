@@ -17,6 +17,12 @@ class BloquinhosMapScreen extends Component {
     this.props.fetch()
   }
 
+  componentDidUpdate(){
+    if(this.props.bloquinhoCardSelected){
+      this.props.navigation.navigate('BloquinhoDetail', {bloquinho: this.props.bloquinhoCardSelected})
+    }
+  }
+
   render() {
     return (
       <View style={styles.mainContainer}>
@@ -35,7 +41,7 @@ class BloquinhosMapScreen extends Component {
           }
           {!this.props.fetching && this.props.bloquinhos && this.props.bloquinhos.length > 0 &&
             <View style={styles.carouselContainer}>
-              <BloquinhoCarousel bloquinhos={this.props.bloquinhos} changed={this.props.bloquinhoSelected}/>
+              <BloquinhoCarousel bloquinhos={this.props.bloquinhos} changed={this.props.bloquinhoSelected} bloquinhoCardClicked={this.props.bloquinhoCardClicked}/>
             </View>}
         </View>
       </View>
@@ -48,14 +54,15 @@ const mapStateToProps = (state) => {
     bloquinhos: state.bloquinhos.bloquinhos,
     fetching: state.bloquinhos.fetching,
     error: state.bloquinhos.error,
-    selectedBloquinho: state.selectedBloquinho
+    bloquinhoCardSelected: state.bloquinhos.bloquinhoCardSelected
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetch: () => dispatch(BloquinhosActions.bloquinhoRequest()),
-    bloquinhoSelected: (bloquinho) => dispatch(BloquinhosActions.bloquinhoSelected(bloquinho))
+    bloquinhoSelected: (bloquinho) => dispatch(BloquinhosActions.bloquinhoSelected(bloquinho)),
+    bloquinhoCardClicked: (bloquinho) => dispatch(BloquinhosActions.bloquinhoCardClicked(bloquinho)),
   }
 }
 
