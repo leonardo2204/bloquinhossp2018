@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, ActivityIndicator, TouchableHighlight } from 'react-native'
+import { ScrollView, Text, Image, View, ActivityIndicator, TouchableHighlight, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import Moment from 'moment/min/moment-with-locales'
 import BloquinhoDetailsAction from '../Redux/BloquinhoDetailRedux'
@@ -30,30 +30,32 @@ class BloquinhoDetail extends Component {
     const outTime = this.props.bloquinho.end_time ? startTime + ' - ' + Moment(this.props.bloquinho.end_time).format('kk:mm') : startTime
     return (
       <View style={styles.mainContainer}>
-        <Header leftComponent={<TouchableHighlight activeOpacity={.9} onPress={() => this.props.navigation.goBack() }>
-          <View>
-            <Icon name='arrow-back' iconStyle={styles.icon} />
-          </View>
-        </TouchableHighlight>}
-          centerComponent={<Text numberOfLines={1} style={styles.subtitle}>{this.props.bloquinho.bloco_name}</Text>} />
+        <Header
+          outerContainerStyles={{ height: Platform.OS === 'ios' ? 70 : 70 - 24 }}
+          leftComponent={<TouchableHighlight onPress={() => this.props.navigation.goBack()}>
+            <View>
+              <Icon name='arrow-back' iconStyle={styles.icon} />
+            </View>
+          </TouchableHighlight>}
+          centerComponent={<Text numberOfLines={1} style={styles.barTitle}>{this.props.bloquinho.bloco_name}</Text>} />
         <ScrollView>
           <Image source={{ uri: this.props.bloquinho.picture }} style={{ height: 220 }} resizeMode='stretch' />
           <Card>
-            <Text style={ styles.blocoTitle }>{this.props.bloquinho.bloco_name}</Text>
+            <Text style={styles.blocoTitle}>{this.props.bloquinho.bloco_name}</Text>
           </Card>
           <Card title={'Informações'}>
             {this.props.fetching ? <ActivityIndicator /> :
               <View>
-                <View style={ styles.iconedTextContainer }>
+                <View style={styles.iconedTextContainer}>
                   <Icon iconStyle={{ padding: 10 }} name='schedule' />
                   <Text style={styles.iconedText}>{outTime}</Text>
                 </View>
-                <View style={ styles.iconedTextContainer }>
+                <View style={styles.iconedTextContainer}>
                   <Icon iconStyle={{ padding: 10 }} name='location-on' />
                   <Text numberOfLines={2} style={styles.iconedText}> {this.props.bloquinho.address}
                   </Text>
                 </View>
-                <View style={ styles.iconedTextContainer }>
+                <View style={styles.iconedTextContainer}>
                   <Icon iconStyle={{ padding: 10 }} name='public' />
                   <Hyperlink linkStyle={{ color: '#074e8e', textDecorationLine: 'underline' }} linkDefault={true}>
                     <Text numberOfLines={2}> {this.props.bloquinho.page} </Text>
@@ -63,9 +65,9 @@ class BloquinhoDetail extends Component {
             }
           </Card>
           <Card title={'Detalhes'}>
-          {this.props.fetching ? <ActivityIndicator /> :
-            <Text>{this.props.bloquinho.description}</Text>
-          }
+            {this.props.fetching ? <ActivityIndicator /> :
+              <Text>{this.props.bloquinho.description}</Text>
+            }
           </Card>
         </ScrollView>
       </View>

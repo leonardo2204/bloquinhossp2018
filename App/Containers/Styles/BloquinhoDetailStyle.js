@@ -23,5 +23,11 @@ export default StyleSheet.create({
   iconedText: { 
     flexGrow: 1,
     width: 0
+  },
+  barTitle: {
+    color: Colors.snow,
+    flexGrow: 1,
+    marginLeft: 10,
+    flexGrow: 1
   }
 })

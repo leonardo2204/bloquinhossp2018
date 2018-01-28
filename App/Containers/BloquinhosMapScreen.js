@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text } from 'react-native'
+import { View, TouchableOpacity, Text, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import BloquinhosMap from '../Components/BloquinhosMap'
 import { Header, Icon } from 'react-native-elements'
@@ -17,9 +17,9 @@ class BloquinhosMapScreen extends Component {
     this.props.fetch()
   }
 
-  componentDidUpdate(){
-    if(this.props.bloquinhoCardSelected){
-      this.props.navigation.navigate('BloquinhoDetail', {bloquinho: this.props.bloquinhoCardSelected})
+  componentDidUpdate() {
+    if (this.props.bloquinhoCardSelected) {
+      this.props.navigation.navigate('BloquinhoDetail', { bloquinho: this.props.bloquinhoCardSelected })
     }
   }
 
@@ -28,6 +28,7 @@ class BloquinhosMapScreen extends Component {
       <View style={styles.mainContainer}>
         <View>
           <Header
+            outerContainerStyles={{ height: Platform.OS === 'ios' ? 70 : 70 - 24 }}
             centerComponent={<Text style={styles.title}>Bloquinhos SP 2018</Text>}
           // rightComponent={<TouchableOpacity onPress={this.onPress}>
           //   <Icon color='#fff' name='add' />
@@ -35,13 +36,13 @@ class BloquinhosMapScreen extends Component {
           />
         </View>
         <View style={styles.blocoContainer}>
-          <BloquinhosMap bloquinhos={this.props.bloquinhos} markerPress={this.props.bloquinhoSelected}/>
+          <BloquinhosMap bloquinhos={this.props.bloquinhos} markerPress={this.props.bloquinhoSelected} />
           {this.props.fetching &&
             <LoadingIndicator />
           }
           {!this.props.fetching && this.props.bloquinhos && this.props.bloquinhos.length > 0 &&
             <View style={styles.carouselContainer}>
-              <BloquinhoCarousel bloquinhos={this.props.bloquinhos} changed={this.props.bloquinhoSelected} bloquinhoCardClicked={this.props.bloquinhoCardClicked}/>
+              <BloquinhoCarousel bloquinhos={this.props.bloquinhos} changed={this.props.bloquinhoSelected} bloquinhoCardClicked={this.props.bloquinhoCardClicked} />
             </View>}
         </View>
       </View>
