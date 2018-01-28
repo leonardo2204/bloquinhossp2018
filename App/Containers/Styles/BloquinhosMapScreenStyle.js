@@ -25,4 +25,12 @@ export default StyleSheet.create({
     marginBottom: 28,
     justifyContent: 'center'
   },
+  modalContent: {
+    backgroundColor: "white",
+    padding: 22,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+    borderColor: "rgba(0, 0, 0, 0.1)"
+  },
 })

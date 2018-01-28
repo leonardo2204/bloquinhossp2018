@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, ActivityIndicator, TouchableHighlight, Platform } from 'react-native'
+import { ScrollView, Text, Image, View, ActivityIndicator, TouchableOpacity, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import Moment from 'moment/min/moment-with-locales'
 import BloquinhoDetailsAction from '../Redux/BloquinhoDetailRedux'
@@ -32,11 +32,11 @@ class BloquinhoDetail extends Component {
       <View style={styles.mainContainer}>
         <Header
           outerContainerStyles={{ height: Platform.OS === 'ios' ? 70 : 70 - 24 }}
-          leftComponent={<TouchableHighlight onPress={() => this.props.navigation.goBack()}>
+          leftComponent={<TouchableOpacity onPress={() => this.props.navigation.goBack()}>
             <View>
               <Icon name='arrow-back' iconStyle={styles.icon} />
             </View>
-          </TouchableHighlight>}
+          </TouchableOpacity>}
           centerComponent={<Text numberOfLines={1} style={styles.barTitle}>{this.props.bloquinho.bloco_name}</Text>} />
         <ScrollView>
           <Image source={{ uri: this.props.bloquinho.picture }} style={{ height: 220 }} resizeMode='stretch' />
