@@ -28,6 +28,5 @@ export default StyleSheet.create({
     color: Colors.snow,
     flexGrow: 1,
     marginLeft: 10,
-    flexGrow: 1
   }
 })
