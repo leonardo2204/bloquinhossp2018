@@ -4,6 +4,7 @@ import Carousel from 'react-native-snap-carousel'
 import { connect } from 'react-redux'
 
 import { styles, sliderWidth, itemWidth } from './Styles/BloquinhosCarouselStyles'
+import { Avatar } from 'react-native-elements'
 
 class BloquinhoCarousel extends Component {
 
@@ -26,10 +27,12 @@ class BloquinhoCarousel extends Component {
     return (
       <TouchableOpacity onPress={() => this.props.bloquinhoCardClicked(item)}
         style={styles.container} activeOpacity={.9}>
-        <Image
+        <Avatar
+        large
+        rounded
           source={{ uri: item.picture }}
-          style={styles.image}>
-        </Image>
+          containerStyle={styles.image}>
+        </Avatar>
         <View style={styles.textContainer}>
           <Text numberOfLines={4}
             style={styles.title}>

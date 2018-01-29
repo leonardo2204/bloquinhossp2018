@@ -10,7 +10,7 @@ export default class LoadingIndicator extends React.Component {
             <View style={styles.loadingContainer}>
                 <View style={styles.loadingIntrisics}>
                     <ActivityIndicator color='white' />
-                    <Text style={styles.loadingText}>Carregando</Text>
+                    <Text style={styles.loadingText}>{this.props.title || 'Carregando'}</Text>
                 </View>
             </View>
         )

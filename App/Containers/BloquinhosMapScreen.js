@@ -6,9 +6,9 @@ import { Header, Icon, Card } from 'react-native-elements'
 import BloquinhoCarousel from '../Components/BloquinhoCarousel'
 import BloquinhosActions from '../Redux/BloquinhoRedux'
 import { NavigationActions } from 'react-navigation'
+import{ LoginButton, AccessToken} from 'react-native-fbsdk'
 
 import LoadingIndicator from '../Components/LoadingIndicator'
-import Modal from 'react-native-modal';
 // Styles
 import styles from './Styles/BloquinhosMapScreenStyle'
 
@@ -24,8 +24,8 @@ class BloquinhosMapScreen extends Component {
         <View>
           <Header
             outerContainerStyles={{ height: Platform.OS === 'ios' ? 70 : 70 - 24 }}
-            centerComponent={<Text style={styles.title}>Bloquinhos SP 2018</Text>}
-            rightComponent={<TouchableOpacity onPress={() => this.props.openModal()}>
+            centerComponent={<Text style={styles.barTitle}>Bloquinhos SP 2018</Text>}
+            rightComponent={<TouchableOpacity onPress={() => this.props.newBloquinhoClicked()}>
               <Icon color='#fff' name='add' />
             </TouchableOpacity>}
           />
@@ -41,13 +41,6 @@ class BloquinhosMapScreen extends Component {
             </View>
           }
         </View>
-        <Modal isVisible={this.props.bloquinhoModalVisible}
-          onBackdropPress={() => this.props.closeModal()}
-          onBackButtonPress={() => this.props.closeModal()}>
-          <Card title={'Adicionar bloquinho do Facebook'}>
-            <Text>dasda</Text>
-          </Card>
-        </Modal>
       </View>
     )
   }
@@ -59,7 +52,6 @@ const mapStateToProps = (state) => {
     fetching: state.bloquinhos.fetching,
     error: state.bloquinhos.error,
     bloquinhoCardSelected: state.bloquinhos.bloquinhoCardSelected,
-    bloquinhoModalVisible: state.bloquinhos.bloquinhoModalVisible,
   }
 }
 
@@ -68,8 +60,7 @@ const mapDispatchToProps = (dispatch) => {
     fetch: () => dispatch(BloquinhosActions.bloquinhoRequest()),
     bloquinhoSelected: (bloquinho) => dispatch(BloquinhosActions.bloquinhoSelected(bloquinho)),
     bloquinhoCardClicked: (bloquinho) => dispatch(NavigationActions.navigate({ routeName: 'BloquinhoDetail', params: {bloquinho} })),
-    openModal: () => dispatch(BloquinhosActions.bloquinhoModalVisible(true)),
-    closeModal: () => dispatch(BloquinhosActions.bloquinhoModalVisible(false)),
+    newBloquinhoClicked: () => dispatch(NavigationActions.navigate({ routeName: 'FacebookEvents' })),
   }
 }
 

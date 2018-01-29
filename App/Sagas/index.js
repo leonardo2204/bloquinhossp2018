@@ -8,11 +8,14 @@ import DebugConfig from '../Config/DebugConfig'
 import { StartupTypes } from '../Redux/StartupRedux'
 import { BloquinhoTypes } from '../Redux/BloquinhoRedux'
 import { BloquinhoDetailTypes } from '../Redux/BloquinhoDetailRedux'
+import { FacebookEventsTypes } from '../Redux/FacebookEventsRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { getBloquinhos, getBloquinhoDetail } from './BloquinhosSagas'
+import { getFacebookEvents } from './FacebookEventsSagas'
+import FacebookEvents from '../Containers/FacebookEvents';
  
 /* ------------- API ------------- */
 
@@ -27,6 +30,7 @@ export default function * root () {
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
     takeLatest(BloquinhoTypes.BLOQUINHO_REQUEST, getBloquinhos, api),
-    takeLatest(BloquinhoDetailTypes.BLOQUINHO_DETAIL_REQUEST, getBloquinhoDetail, api)
+    takeLatest(BloquinhoDetailTypes.BLOQUINHO_DETAIL_REQUEST, getBloquinhoDetail, api),
+    takeLatest(FacebookEventsTypes.FACEBOOK_EVENTS_REQUEST, getFacebookEvents),
   ])
 }
