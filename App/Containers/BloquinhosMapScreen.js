@@ -24,11 +24,10 @@ class BloquinhosMapScreen extends Component {
         <View>
           <Header
             outerContainerStyles={{ height: Platform.OS === 'ios' ? 70 : 70 - 24 }}
-            centerComponent={<Text style={styles.barTitle}>Bloquinhos SP 2018</Text>}
-            rightComponent={<TouchableOpacity onPress={() => this.props.newBloquinhoClicked()}>
+            centerComponent={<Text style={styles.barTitle}>Bloquinhos SP 2018</Text>}/>
+            {/* rightComponent={<TouchableOpacity onPress={() => this.props.newBloquinhoClicked()}>
               <Icon color='#fff' name='add' />
-            </TouchableOpacity>}
-          />
+            </TouchableOpacity>} */}
         </View>
         <View style={styles.blocoContainer}>
           <BloquinhosMap bloquinhos={this.props.bloquinhos} markerPress={this.props.bloquinhoSelected} />
