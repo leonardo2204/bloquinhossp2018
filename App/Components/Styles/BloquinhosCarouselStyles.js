@@ -28,10 +28,7 @@ export const styles = StyleSheet.create({
   },
   image: {
     marginLeft: 10,
-    width: 75,
-    height: 75,
     alignSelf: 'center',
-    borderRadius: 37.5
   },
   textContainer: {
     flexGrow: 1,
@@ -45,11 +42,4 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
   },
-  subtitle: {
-    marginTop: 10,
-    marginLeft: 10,
-    fontFamily: "Avenir",
-    fontSize: 15,
-    fontWeight: "500",
-  }
 })

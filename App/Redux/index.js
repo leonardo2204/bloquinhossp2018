@@ -7,6 +7,7 @@ export const reducers = combineReducers({
   nav: require('./NavigationRedux').reducer,
   bloquinhos: require('./BloquinhoRedux').reducer,
   bloquinhoDetail: require('./BloquinhoDetailRedux').reducer,
+  facebookEvents: require('./FacebookEventsRedux').reducer,
 })
 
 export default () => {

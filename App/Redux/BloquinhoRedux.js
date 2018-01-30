@@ -9,7 +9,6 @@ const { Types, Creators } = createActions({
   bloquinhoSuccess: ['bloquinhos'],
   bloquinhoFailure: null,
   bloquinhoSelected: ['bloquinho'],
-  bloquinhoCardClicked: ['bloco'],
 })
 
 export const BloquinhoTypes = Types
@@ -22,14 +21,7 @@ export const INITIAL_STATE = Immutable({
   fetching: null,
   error: null,
   bloquinhoSelected: null,
-  bloquinhoCardSelected: null,
 })
-
-/* ------------- Selectors ------------- */
-
-export const BloquinhoSelectors = {
-  selectBloquinhos: state => state.bloquinhos
-}
 
 /* ------------- Reducers ------------- */
 
@@ -49,11 +41,6 @@ export const bloquinhoSelected = (state, action) => {
   return state.merge({ bloquinhoSelected: bloquinho })
 }
 
-export const bloquinhoCardClicked = (state, action) => {
-  const { blocoId, picture, bloco_name } = action.bloco
-  return state.merge({ bloquinhoCardSelected: {blocoId, picture, bloco_name} })
-}
-
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -61,5 +48,4 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.BLOQUINHO_SUCCESS]: success,
   [Types.BLOQUINHO_FAILURE]: failure,
   [Types.BLOQUINHO_SELECTED]: bloquinhoSelected,
-  [Types.BLOQUINHO_CARD_CLICKED]: bloquinhoCardClicked,
 })

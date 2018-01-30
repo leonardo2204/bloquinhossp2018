@@ -43,8 +43,11 @@ const ApplicationStyles = {
     titleText: {
       ...Fonts.style.h2,
       fontSize: 14,
-      color: Colors.text
-    }
+      color: Colors.text,
+    },
+    barTitle: {
+      color: Colors.snow,
+    },
   },
   darkLabelContainer: {
     padding: Metrics.smallMargin,
@@ -74,7 +77,7 @@ const ApplicationStyles = {
     borderColor: Colors.ember,
     alignItems: 'center',
     textAlign: 'center'
-  }
+  },
 }
 
 export default ApplicationStyles
