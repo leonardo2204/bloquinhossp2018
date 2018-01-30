@@ -1,9 +1,8 @@
-import { put, select } from 'redux-saga/effects'
+import { put, select, spawn } from 'redux-saga/effects'
 import { is } from 'ramda'
-
-// exported to make available for tests
-//export const selectAvatar = GithubSelectors.selectAvatar
+import codePushSaga from "react-native-code-push-saga";
 
 // process STARTUP actions
 export function * startup (action) {
+    yield spawn(codePushSaga);
 }

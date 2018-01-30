@@ -1,6 +1,6 @@
 {
 	"ProjectName": "BloquinhosSp2018",
-	"ProjectPath": "/Users/leonardo2204/react-native/bloquinhossp2018",
+	"ProjectPath": "/Users/leonardo/react-native/bloquinhossp2018",
 	"SourceDir": "src",
 	"DistributionDir": "build",
 	"BuildCommand": "npm run-script build",

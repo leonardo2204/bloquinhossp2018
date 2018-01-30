@@ -1,4 +1,5 @@
 <resources>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">4cb56a89-1976-4223-a352-117e74297c31</string>
     <string name="app_name">BloquinhosSp2018</string>
     <string name="facebook_app_id">300234403834082</string>
 </resources>
