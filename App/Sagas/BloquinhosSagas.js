@@ -16,7 +16,6 @@ export function* getBloquinhos(api, action) {
 
   try {
     const response = yield call(api.getRoot, latitude, longitude)
-    throw new Error('se q la')
     if (response) {
       yield put(BloquinhosActions.bloquinhoSuccess(response))
     } else {
@@ -34,7 +33,6 @@ export function* getBloquinhoDetail(api, action) {
 
   try {
     const response = yield call(api.getBloquinho, blocoId)
-
     if (response && response.length > 0) {
       yield put(BloquinhosDetailActions.bloquinhoDetailSuccess(response[0]))
     } else {

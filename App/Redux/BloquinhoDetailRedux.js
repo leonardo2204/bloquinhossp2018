@@ -38,7 +38,7 @@ export const success = (state, action) => {
 }
 
 export const failure = (state) =>
-  state.merge({ fetching: false, error: true, bloquinho: null })
+  state.merge({ fetching: false, error: true })
 
 /* ------------- Hookup Reducers To Types ------------- */
 

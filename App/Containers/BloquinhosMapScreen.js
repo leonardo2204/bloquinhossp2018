@@ -9,6 +9,7 @@ import { NavigationActions } from 'react-navigation'
 import { LoginButton, AccessToken } from 'react-native-fbsdk'
 
 import LoadingIndicator from '../Components/LoadingIndicator'
+import ErrorCard from '../Components/ErrorCard'
 // Styles
 import styles from './Styles/BloquinhosMapScreenStyle'
 
@@ -39,15 +40,7 @@ class BloquinhosMapScreen extends Component {
               <BloquinhoCarousel bloquinhos={this.props.bloquinhos} changed={this.props.bloquinhoSelected} bloquinhoCardClicked={this.props.bloquinhoCardClicked} />
             </View>
           }
-          {/* wrap this inside a self component for reuse */}
-          {this.props.error && <View style={styles.errorContainer}>
-            <TouchableOpacity activeOpacity={.9}>
-              <Card wrapperStyle={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text>Ocorreu um erro</Text>
-                <Text style={{color:'skyblue'}}>Tente Novamente</Text>
-              </Card>
-            </TouchableOpacity>
-          </View>}
+          {this.props.error && <ErrorCard onPress={() => this.props.fetch()}/>}
         </View>
       </View>
     )
