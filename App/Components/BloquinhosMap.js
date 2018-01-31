@@ -70,7 +70,9 @@ class BloquinhosMap extends React.Component {
         //onRegionChangeComplete={this.onRegionChange}
         //showsUserLocation={this.state.showUserLocation}
       >
-        {this.props.bloquinhos && this.props.bloquinhos.map((bloquinho) => this.renderMapMarkers(bloquinho))}
+        {this.props.bloquinhos && this.props.bloquinhos.map((bloquinho) => { 
+            this.renderMapMarkers(bloquinho)
+        })}
       </MapView>
     )
   }
