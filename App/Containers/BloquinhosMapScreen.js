@@ -6,7 +6,7 @@ import { Header, Icon, Card } from 'react-native-elements'
 import BloquinhoCarousel from '../Components/BloquinhoCarousel'
 import BloquinhosActions from '../Redux/BloquinhoRedux'
 import { NavigationActions } from 'react-navigation'
-import{ LoginButton, AccessToken} from 'react-native-fbsdk'
+import { LoginButton, AccessToken } from 'react-native-fbsdk'
 
 import LoadingIndicator from '../Components/LoadingIndicator'
 // Styles
@@ -24,8 +24,8 @@ class BloquinhosMapScreen extends Component {
         <View>
           <Header
             outerContainerStyles={{ height: Platform.OS === 'ios' ? 70 : 70 - 24 }}
-            centerComponent={<Text style={styles.barTitle}>Bloquinhos SP 2018</Text>}/>
-            {/* rightComponent={<TouchableOpacity onPress={() => this.props.newBloquinhoClicked()}>
+            centerComponent={<Text style={styles.barTitle}>Bloquinhos SP 2018</Text>} />
+          {/* rightComponent={<TouchableOpacity onPress={() => this.props.newBloquinhoClicked()}>
               <Icon color='#fff' name='add' />
             </TouchableOpacity>} */}
         </View>
@@ -39,6 +39,15 @@ class BloquinhosMapScreen extends Component {
               <BloquinhoCarousel bloquinhos={this.props.bloquinhos} changed={this.props.bloquinhoSelected} bloquinhoCardClicked={this.props.bloquinhoCardClicked} />
             </View>
           }
+          {/* wrap this inside a self component for reuse */}
+          {this.props.error && <View style={styles.errorContainer}>
+            <TouchableOpacity activeOpacity={.9}>
+              <Card wrapperStyle={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text>Ocorreu um erro</Text>
+                <Text style={{color:'skyblue'}}>Tente Novamente</Text>
+              </Card>
+            </TouchableOpacity>
+          </View>}
         </View>
       </View>
     )
@@ -58,7 +67,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetch: () => dispatch(BloquinhosActions.bloquinhoRequest()),
     bloquinhoSelected: (bloquinho) => dispatch(BloquinhosActions.bloquinhoSelected(bloquinho)),
-    bloquinhoCardClicked: (bloquinho) => dispatch(NavigationActions.navigate({ routeName: 'BloquinhoDetail', params: {bloquinho} })),
+    bloquinhoCardClicked: (bloquinho) => dispatch(NavigationActions.navigate({ routeName: 'BloquinhoDetail', params: { bloquinho } })),
     newBloquinhoClicked: () => dispatch(NavigationActions.navigate({ routeName: 'FacebookEvents' })),
   }
 }

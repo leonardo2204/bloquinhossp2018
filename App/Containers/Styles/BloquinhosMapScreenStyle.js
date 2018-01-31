@@ -33,4 +33,8 @@ export default StyleSheet.create({
     borderRadius: 4,
     borderColor: "rgba(0, 0, 0, 0.1)"
   },
+  errorContainer: {
+    marginBottom: 28,
+    justifyContent: 'center'
+  }
 })
