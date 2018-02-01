@@ -33,7 +33,8 @@ class BloquinhosMap extends React.Component {
 
   renderMapMarkers (bloquinho) {
     return (
-      <MapView.Marker key={bloquinho.blocoId} identifier={bloquinho.blocoId} coordinate={{latitude: bloquinho.latitude, longitude: bloquinho.longitude}} 
+      <MapView.Marker key={bloquinho.blocoId} pinColor={bloquinho.blocoId  == this.props.selectedBloquinho.blocoId ? 'lime': 'red'}
+       identifier={bloquinho.blocoId} coordinate={{latitude: bloquinho.latitude, longitude: bloquinho.longitude}} 
       onPress={(e) => this.markerPress(e.nativeEvent)}/>
     )
   }
