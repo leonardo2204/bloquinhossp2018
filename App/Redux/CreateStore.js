@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import Config from '../Config/DebugConfig'
 import createSagaMiddleware from 'redux-saga'
 import ScreenTracking from './ScreenTrackingMiddleware'
+import AnalyticsMiddleware from './AnalyticsMiddleware'
 
 // creates the store
 export default (rootReducer, rootSaga) => {
@@ -11,7 +12,7 @@ export default (rootReducer, rootSaga) => {
   const enhancers = []
 
   /* ------------- Analytics Middleware ------------- */
-  middleware.push(ScreenTracking)
+  middleware.push(ScreenTracking, AnalyticsMiddleware)
 
   /* ------------- Saga Middleware ------------- */
 
