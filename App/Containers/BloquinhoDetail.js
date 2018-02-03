@@ -7,6 +7,7 @@ import BloquinhoDetailsAction from '../Redux/BloquinhoDetailRedux'
 // Styles
 import styles from './Styles/BloquinhoDetailStyle'
 import { Divider, Icon, Header, Card } from 'react-native-elements';
+import ErrorCard from '../Components/ErrorCard'
 import Hyperlink from 'react-native-hyperlink'
 
 class BloquinhoDetail extends Component {
@@ -43,7 +44,8 @@ class BloquinhoDetail extends Component {
           <Card>
             <Text style={styles.blocoTitle}>{this.props.bloquinho.bloco_name}</Text>
           </Card>
-          <Card title={'Informações'}>
+          
+          {!this.props.error && this.props.bloquinho && <Card title={'Informações'}>
             {this.props.fetching ? <ActivityIndicator /> :
               <View>
                 <View style={styles.iconedTextContainer}>
@@ -63,13 +65,14 @@ class BloquinhoDetail extends Component {
                 </View>
               </View>
             }
-          </Card>
-          <Card title={'Detalhes'}>
+          </Card>}
+          {!this.props.error && this.props.bloquinho && <Card title={'Detalhes'}>
             {this.props.fetching ? <ActivityIndicator /> :
               <Text>{this.props.bloquinho.description}</Text>
             }
-          </Card>
+          </Card>}
         </ScrollView>
+        {this.props.error && <ErrorCard onPress={() => this.props.fetchBloquinhoDetail(this.props.bloquinho.blocoId)}/>}
       </View>
     )
   }

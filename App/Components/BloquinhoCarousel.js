@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import { styles, sliderWidth, itemWidth } from './Styles/BloquinhosCarouselStyles'
 import { Avatar } from 'react-native-elements'
 
+import BloquinhosActions from '../Redux/BloquinhoRedux'
+
 class BloquinhoCarousel extends Component {
 
   constructor(props) {
@@ -64,4 +66,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(BloquinhoCarousel)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    //cardClickEnabled: (enabled) => dispatch(BloquinhosActions.bloquinhoCardClickEnabled(enabled))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BloquinhoCarousel)
