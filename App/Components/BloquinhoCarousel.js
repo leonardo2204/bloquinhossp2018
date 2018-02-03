@@ -68,7 +68,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    cardClickEnabled: (enabled) => dispatch(BloquinhosActions.bloquinhoCardClickEnabled(enabled))
+    //cardClickEnabled: (enabled) => dispatch(BloquinhosActions.bloquinhoCardClickEnabled(enabled))
   }
 }
 
