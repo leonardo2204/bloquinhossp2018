@@ -60,7 +60,6 @@ buck-out/
 #~awsmobilejs
 awsmobilejs/.awsmobile/backend-build
 awsmobilejs/\#current-backend-info
-aws-exports.js
 
 android/app/android.jks
 android/app/app-release.apk

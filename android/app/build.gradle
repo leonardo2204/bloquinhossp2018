@@ -73,7 +73,8 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js"
+    entryFile: "index.js",
+    nodeExecutableAndArgs : ["/usr/local/bin/node"]
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -109,7 +110,7 @@ def getPassword(String currentUser, String keyChain) {
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "23.0.3"
+    buildToolsVersion "27.0.0"
 
     defaultConfig {
         applicationId "com.bloquinhossp2018"
