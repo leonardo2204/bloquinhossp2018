@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, ActivityIndicator, TouchableOpacity, Platform } from 'react-native'
+import { ScrollView, Text, Image, View, ActivityIndicator, TouchableOpacity, Platform, Linking, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import Moment from 'moment/min/moment-with-locales'
 import BloquinhoDetailsAction from '../Redux/BloquinhoDetailRedux'
@@ -21,6 +21,26 @@ class BloquinhoDetail extends Component {
   componentDidMount() {
     this.props.preset(this.props.navigation.state.params.bloquinho)
     this.props.fetchBloquinhoDetail(this.props.navigation.state.params.bloquinho.blocoId)
+  }
+
+  openMap = (lat, long) => {
+    const call = Platform.select({
+      ios: () => {
+          Linking.openURL(`http://maps.apple.com/?ll=${lat},${long}`);
+      },
+      android: () => {
+          Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${lat},${long}`).catch(err => console.error('An error occurred', err));;
+      }
+  });
+    
+    Alert.alert(
+      'Maps',
+      'Abrir no Maps?',
+      [
+        {text: 'Não', style: 'cancel'},
+        {text: 'Sim', onPress: () => call()},
+      ]
+    )
   }
 
   render() {
@@ -52,11 +72,11 @@ class BloquinhoDetail extends Component {
                   <Icon iconStyle={{ padding: 10 }} name='schedule' />
                   <Text style={styles.iconedText}>{outTime}</Text>
                 </View>
-                <View style={styles.iconedTextContainer}>
+                <TouchableOpacity style={styles.iconedTextContainer} onPress={() => this.openMap(this.props.bloquinho.latitude, this.props.bloquinho.longitude) } activeOpacity={.9}>
                   <Icon iconStyle={{ padding: 10 }} name='location-on' />
                   <Text numberOfLines={2} style={styles.iconedText}> {this.props.bloquinho.address}
                   </Text>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.iconedTextContainer}>
                   <Icon iconStyle={{ padding: 10 }} name='public' />
                   <Hyperlink linkStyle={{ color: '#074e8e', textDecorationLine: 'underline' }} linkDefault={true}>
