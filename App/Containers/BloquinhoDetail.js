@@ -26,7 +26,7 @@ class BloquinhoDetail extends Component {
   openMap = (lat, long) => {
     const call = Platform.select({
       ios: () => {
-          Linking.openURL(`http://maps.apple.com/maps?daddr=${lat},${long}`);
+          Linking.openURL(`http://maps.apple.com/?ll=${lat},${long}`);
       },
       android: () => {
           Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${lat},${long}`).catch(err => console.error('An error occurred', err));;
@@ -41,9 +41,7 @@ class BloquinhoDetail extends Component {
         {text: 'Sim', onPress: () => call()},
       ]
     )
-
-    //call();
-}
+  }
 
   render() {
     if (!this.props.bloquinho)
