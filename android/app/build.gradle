@@ -150,16 +150,19 @@ android {
         debug {
             applicationIdSuffix ".development"
             buildConfigField "String", "CODEPUSH_KEY", '""'
+            manifestPlaceholders = [excludeSystemAlertWindowPermission: "false"]
         }
 
         releaseStaging {
             buildConfigField "String", "CODEPUSH_KEY", '"zA84a6kLxMZ6mdO5tctTE3e-rhAQBJNe0pwIG"'
+            manifestPlaceholders = [excludeSystemAlertWindowPermission: "false"]
         }
 
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
+            manifestPlaceholders = [excludeSystemAlertWindowPermission: "true"]
             buildConfigField "String", "CODEPUSH_KEY", '"7ODVJr0NaH9ouTjjI-y-I-3j_z2QHyZVe0TvLz"'
         }
     }
