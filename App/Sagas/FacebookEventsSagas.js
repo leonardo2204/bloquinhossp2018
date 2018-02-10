@@ -1,15 +1,3 @@
-/* ***********************************************************
- * A short word on how to use this automagically generated file.
- * We're often asked in the ignite gitter channel how to connect
- * to a to a third party api, so we thought we'd demonstrate - but
- * you should know you can use sagas for other flow control too.
- *
- * Other points:
- *  - You'll need to add this saga to sagas/index.js
- *  - This template uses the api declared in sagas/index.js, so
- *    you'll need to define a constant in that file.
- *************************************************************/
-
 import {
   call,
   put
@@ -20,12 +8,17 @@ import {
   GraphRequest,
   GraphRequestManager
 } from 'react-native-fbsdk'
-// import { FacebookEventsSelectors } from '../Redux/FacebookEventsRedux'
+
+function* getCurrentAccessToken(){
+  return yield call(AccessToken.getCurrentAccessToken)
+}
 
 export function* getFacebookEvents(action) {
 
-  const accessToken = yield call(AccessToken.getCurrentAccessToken);
-  console.tron.log(accessToken)
+  const accessToken = yield call(getCurrentAccessToken);
+  
+  if(!accessToken)
+    return yield put(FacebookEventsActions.facebookEventsUserNotLoggedIn())
 
   const graphRequest = () => new Promise((resolve, reject) => {
     const infoRequest = new GraphRequest(
@@ -55,8 +48,6 @@ export function* getFacebookEvents(action) {
 
   // success?
   if (graphResponse.data) {
-    // You might need to change the response here - do this with a 'transform',
-    // located in ../Transforms/. Otherwise, just pass the data back from the api.
     yield put(FacebookEventsActions.facebookEventsSuccess(graphResponse.data))
   } else {
     yield put(FacebookEventsActions.facebookEventsFailure())

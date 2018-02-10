@@ -5,7 +5,7 @@ import { AccessToken, GraphRequest, GraphRequestManager, LoginButton } from 'rea
 
 // Styles
 import styles from './Styles/FacebookEventsStyle'
-import { Icon, Header, Avatar } from 'react-native-elements';
+import { Icon, Header, Avatar, Card } from 'react-native-elements';
 
 import FacebookEventsActions from '../Redux/FacebookEventsRedux'
 import LoadingIndicator from '../Components/LoadingIndicator';
@@ -35,39 +35,15 @@ class FacebookEvents extends React.PureComponent {
     )
   }
 
-  /* ***********************************************************
-  * STEP 3
-  * Consider the configurations we've set below.  Customize them
-  * to your liking!  Each with some friendly advice.
-  *************************************************************/
-  // Show this when data is empty
   renderEmpty = () =>
     <Text style={styles.label}> - Nothing to See Here - </Text>
 
   renderSeparator = () =>
     <View style={styles.separator} />
 
-  // The default function if no Key is provided is index
-  // an identifiable key is important if you plan on
-  // item reordering.  Otherwise index is fine
   keyExtractor = (item, index) => item.id
 
-  // How many items should be kept im memory as we scroll?
   oneScreensWorth = 20
-
-  // extraData is for anything that is not indicated in data
-  // for instance, if you kept "favorites" in `this.state.favs`
-  // pass that in, so changes in favorites will cause a re-render
-  // and your renderItem will have access to change depending on state
-  // e.g. `extraData`={this.state.favs}
-
-  // Optimize your list if the height of each item can be calculated
-  // by supplying a constant height, there is no need to measure each
-  // item after it renders.  This can save significant time for lists
-  // of a size 100+
-  // e.g. itemLayout={(data, index) => (
-  //   {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index}
-  // )}
 
   render() {
     return (
@@ -80,7 +56,7 @@ class FacebookEvents extends React.PureComponent {
               <Icon name='arrow-back' iconStyle={styles.icon} />
             </View>
           </TouchableOpacity>} />
-        {this.props.fetching  && <LoadingIndicator />}
+        {this.props.fetching && <LoadingIndicator />}
         {this.props.events && <FlatList
           contentContainerStyle={styles.listContent}
           data={this.props.events}
@@ -90,22 +66,37 @@ class FacebookEvents extends React.PureComponent {
           ListEmptyComponent={this.renderEmpty}
           ItemSeparatorComponent={this.renderSeparator}
         />}
-        <LoginButton />
+        {!this.props.userLoggedIn && <View style={{flex: 1,  alignContent: 'center', justifyContent: 'center'}}>
+          <Card title={'Login'} wrapperStyle={{alignItems: 'center'}}>
+            <Text style={{marginBottom : 15}}>
+              <Text>Usamos o facebook para importar seus eventos para nossa plataforma. Não salvamos absolutamente nenhuma informação de sua conta.</Text>
+            </Text>
+            <LoginButton onLoginFinished={
+              (error, result) => {
+                if (error || result.isCancelled) return null
+                this.props.userLoggedIn()
+              }
+            }
+              onLogoutFinished={() => this.props.userLoggedOut()} />
+          </Card>
+        </View>}
       </View>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  const { events, fetching } = state.facebookEvents
+  const { events, fetching, userLoggedIn } = state.facebookEvents
   return {
-    events, fetching
+    events, fetching, userLoggedIn
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchMyEvents: () => dispatch(FacebookEventsActions.facebookEventsRequest())
+    fetchMyEvents: () => dispatch(FacebookEventsActions.facebookEventsRequest()),
+    userLoggedIn: () => dispatch(FacebookEventsActions.facebookEventsRequest()),
+    userLoggedOut: () => dispatch(FacebookEvents.facebookEventsUserNotLoggedIn())
   }
 }
 

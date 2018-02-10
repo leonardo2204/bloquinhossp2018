@@ -3,6 +3,7 @@ import { ScrollView, Text, Image, View, ActivityIndicator, TouchableOpacity, Pla
 import { connect } from 'react-redux'
 import Moment from 'moment/min/moment-with-locales'
 import BloquinhoDetailsAction from '../Redux/BloquinhoDetailRedux'
+import BloquinhoHeaderComponent from "../Components/BloquinhoHeaderComponent";
 
 // Styles
 import styles from './Styles/BloquinhoDetailStyle'
@@ -19,26 +20,25 @@ class BloquinhoDetail extends Component {
   }
 
   componentDidMount() {
-    this.props.preset(this.props.navigation.state.params.bloquinho)
-    this.props.fetchBloquinhoDetail(this.props.navigation.state.params.bloquinho.blocoId)
+    this.props.fetchBloquinhoDetail(this.props.bloquinho.blocoId)
   }
 
   openMap = (lat, long) => {
     const call = Platform.select({
       ios: () => {
-          Linking.openURL(`http://maps.apple.com/?ll=${lat},${long}`);
+        Linking.openURL(`http://maps.apple.com/?ll=${lat},${long}`);
       },
       android: () => {
-          Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${lat},${long}`).catch(err => console.error('An error occurred', err));;
+        Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${lat},${long}`).catch(err => console.error('An error occurred', err));;
       }
-  });
-    
+    });
+
     Alert.alert(
       'Maps',
       'Abrir no Maps?',
       [
-        {text: 'Não', style: 'cancel'},
-        {text: 'Sim', onPress: () => call()},
+        { text: 'Não', style: 'cancel' },
+        { text: 'Sim', onPress: () => call() },
       ]
     )
   }
@@ -51,20 +51,15 @@ class BloquinhoDetail extends Component {
     const outTime = this.props.bloquinho.end_time ? startTime + ' - ' + Moment(this.props.bloquinho.end_time).format('kk:mm') : startTime
     return (
       <View style={styles.mainContainer}>
-        <Header
-          outerContainerStyles={{ height: Platform.OS === 'ios' ? 70 : 70 - 24 }}
-          leftComponent={<TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-            <View>
-              <Icon name='arrow-back' iconStyle={styles.icon} />
-            </View>
-          </TouchableOpacity>}
+        <BloquinhoHeaderComponent
+          navigateBack={true}
           centerComponent={<Text numberOfLines={1} style={styles.barTitle}>{this.props.bloquinho.bloco_name}</Text>} />
         <ScrollView>
           <Image source={{ uri: this.props.bloquinho.picture }} style={{ height: 220 }} resizeMode='stretch' />
           <Card>
             <Text style={styles.blocoTitle}>{this.props.bloquinho.bloco_name}</Text>
           </Card>
-          
+
           {!this.props.error && this.props.bloquinho && <Card title={'Informações'}>
             {this.props.fetching ? <ActivityIndicator /> :
               <View>
@@ -72,16 +67,16 @@ class BloquinhoDetail extends Component {
                   <Icon iconStyle={{ padding: 10 }} name='schedule' />
                   <Text style={styles.iconedText}>{outTime}</Text>
                 </View>
-                <TouchableOpacity style={styles.iconedTextContainer} onPress={() => this.openMap(this.props.bloquinho.latitude, this.props.bloquinho.longitude) } activeOpacity={.9}>
+                <TouchableOpacity style={styles.iconedTextContainer} onPress={() => this.openMap(this.props.bloquinho.latitude, this.props.bloquinho.longitude)} activeOpacity={.9}>
                   <Icon iconStyle={{ padding: 10 }} name='location-on' />
                   <Text numberOfLines={2} style={styles.iconedText}> {this.props.bloquinho.address}
                   </Text>
                 </TouchableOpacity>
                 <View style={styles.iconedTextContainer}>
                   <Icon iconStyle={{ padding: 10 }} name='public' />
-                  <Hyperlink linkStyle={{ color: '#074e8e', textDecorationLine: 'underline' }} linkDefault={true}>
+                 {this.props.bloquinho.page && <Hyperlink linkStyle={{ color: '#074e8e', textDecorationLine: 'underline' }} linkDefault={true}>
                     <Text numberOfLines={2}> {this.props.bloquinho.page} </Text>
-                  </Hyperlink>
+                  </Hyperlink>}
                 </View>
               </View>
             }
@@ -92,7 +87,7 @@ class BloquinhoDetail extends Component {
             }
           </Card>}
         </ScrollView>
-        {this.props.error && <ErrorCard onPress={() => this.props.fetchBloquinhoDetail(this.props.bloquinho.blocoId)}/>}
+        {this.props.error && <ErrorCard onPress={() => this.props.fetchBloquinhoDetail(this.props.bloquinho.blocoId)} />}
       </View>
     )
   }
@@ -100,7 +95,7 @@ class BloquinhoDetail extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    bloquinho: state.bloquinhoDetail.bloquinho,
+    bloquinho: state.bloquinhoDetail.bloquinho || state.bloquinhos.bloquinhoSelected,
     fetching: state.bloquinhoDetail.fetching,
     error: state.bloquinhoDetail.error
   }
@@ -109,7 +104,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchBloquinhoDetail: (id) => dispatch(BloquinhoDetailsAction.bloquinhoDetailRequest(id)),
-    preset: (bloquinho) => dispatch(BloquinhoDetailsAction.bloquinhoDetailPreset(bloquinho.bloco_name, bloquinho.blocoId, bloquinho.picture))
   }
 }
 
